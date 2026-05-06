@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: sans-serif;
 }
 
 /* subtle tech background */
@@ -35,13 +36,18 @@ body::before {
   to { transform: translateY(-40px); }
 }
 
-/* hidden trigger */
-#trigger {
-  width: 6px;
-  height: 6px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 50%;
+/* password box */
+#login {
   z-index: 2;
+}
+
+input {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  outline: none;
 }
 
 /* image */
@@ -57,23 +63,25 @@ body::before {
 
 <body>
 
-<div id="trigger"></div>
+<div id="login">
+  <input type="password" id="pass" placeholder="••••" />
+</div>
 
 <img id="img" src="https://i.postimg.cc/59v5pB1j/IMG-6632.png">
 
 <script>
 
-let taps = 0;
+const PASSWORD = "build"; // 👈 change this to anything you want
 
-document.body.addEventListener("click", () => {
-  taps++;
-
-  if (taps === 3) {
-    document.getElementById("trigger").style.display = "none";
-    document.getElementById("img").style.display = "block";
+document.getElementById("pass").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    if (this.value === PASSWORD) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("img").style.display = "block";
+    } else {
+      this.value = "";
+    }
   }
-
-  setTimeout(() => taps = 0, 1000);
 });
 
 </script>
