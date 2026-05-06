@@ -1,0 +1,82 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+  margin: 0;
+  background: #050505;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* subtle tech background */
+body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 40px
+  );
+  animation: move 20s linear infinite;
+}
+
+@keyframes move {
+  from { transform: translateY(0); }
+  to { transform: translateY(-40px); }
+}
+
+/* hidden trigger */
+#trigger {
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* image */
+#img {
+  display: none;
+  position: absolute;
+  max-width: 90%;
+  z-index: 3;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="trigger"></div>
+
+<img id="img" src="https://i.postimg.cc/59v5pB1j/IMG-6632.png">
+
+<script>
+
+let taps = 0;
+
+document.body.addEventListener("click", () => {
+  taps++;
+
+  if (taps === 3) {
+    document.getElementById("trigger").style.display = "none";
+    document.getElementById("img").style.display = "block";
+  }
+
+  setTimeout(() => taps = 0, 1000);
+});
+
+</script>
+
+</body>
+</html>
